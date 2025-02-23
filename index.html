@@ -89,6 +89,19 @@
         .about-us, .services, .process, .portfolio, .blogs, .contact {
             padding: 60px 20px;
             text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+        }
+
+        .about-us.visible,
+        .services.visible,
+        .process.visible,
+        .portfolio.visible,
+        .blogs.visible,
+        .contact.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .about-us p {
@@ -323,8 +336,9 @@
             background: #000;
         }
 
-        .social-links a {
-            color: #000;
+        /* Remove social media links from footer */
+        footer .social-links {
+            display: none;
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap" rel="stylesheet">
@@ -478,11 +492,6 @@
 
     <!-- Footer -->
     <footer>
-        <div class="social-links">
-            <a href="#"><i class="fa-brands fa-facebook"></i></a>
-            <a href="#"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-        </div>
         <p>&copy; 2025 Vistāra Ventures. All rights reserved.</p>
     </footer>
 
@@ -537,6 +546,18 @@
             const burgerMenu = document.querySelector('.burger-menu');
             burgerMenu.classList.toggle('active');
         }
+
+        // Pop-up animation for sections
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                if (sectionTop < windowHeight - 100) {
+                    section.classList.add('visible');
+                }
+            });
+        });
     </script>
 </body>
 </html>
