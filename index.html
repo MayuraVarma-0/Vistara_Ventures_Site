@@ -55,6 +55,13 @@
 
         .nav-links a:hover {
             color: #000;
+            border-bottom: 2px solid #000;
+        }
+
+        .burger-menu {
+            display: none;
+            cursor: pointer;
+            font-size: 2em;
         }
 
         .hero {
@@ -246,17 +253,6 @@
             padding: 20px;
         }
 
-        .social-links a {
-            color: white;
-            margin: 0 10px;
-            font-size: 1.5em;
-            transition: transform 0.3s ease;
-        }
-
-        .social-links a:hover {
-            transform: scale(1.2);
-        }
-
         /* Social Media Buttons */
         .social-media-buttons {
             position: fixed;
@@ -282,9 +278,6 @@
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
-            }
-            .nav-links.active {
-                display: flex;
                 flex-direction: column;
                 align-items: center;
                 position: absolute;
@@ -293,17 +286,16 @@
                 width: 100%;
                 background: #fff;
                 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                padding: 20px 0;
             }
-            .nav-links.active li {
+            .nav-links.active {
+                display: flex;
+            }
+            .nav-links li {
                 margin: 10px 0;
             }
             .burger-menu {
                 display: block;
-                cursor: pointer;
-                font-size: 2em;
-            }
-            .burger-menu.active {
-                transform: rotate(90deg);
             }
             .hero-content h1 {
                 font-size: 2em;
@@ -334,11 +326,6 @@
 
         .contact button {
             background: #000;
-        }
-
-        /* Remove social media links from footer */
-        footer .social-links {
-            display: none;
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap" rel="stylesheet">
@@ -503,6 +490,11 @@
                 document.querySelector(this.getAttribute('href')).scrollIntoView({
                     behavior: 'smooth'
                 });
+                // Close the mobile menu after clicking a link
+                const navLinks = document.querySelector('.nav-links');
+                navLinks.classList.remove('active');
+                const burgerMenu = document.querySelector('.burger-menu');
+                burgerMenu.classList.remove('active');
             });
         });
 
