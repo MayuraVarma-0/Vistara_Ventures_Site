@@ -244,6 +244,27 @@
             transform: scale(1.2);
         }
 
+        /* Social Media Buttons */
+        .social-media-buttons {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .social-media-buttons a {
+            color: #ff6f61;
+            font-size: 1.5em;
+            transition: transform 0.3s ease;
+        }
+
+        .social-media-buttons a:hover {
+            transform: scale(1.2);
+        }
+
         /* Slideshow */
         .slideshow-container {
             position: relative;
@@ -312,6 +333,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <!-- Social Media Buttons -->
+    <div class="social-media-buttons">
+        <a href="#" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+        <a href="#" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+    </div>
+
     <!-- Header -->
     <header>
         <nav>
@@ -340,7 +368,7 @@
     <!-- About Us Section -->
     <section id="about" class="about-us">
         <h2>About Us</h2>
-        <p>Vistāra Ventures is a leading architecture, construction, and interior design firm dedicated to transforming spaces into exceptional experiences. Our team of experts combines creativity, precision, and passion to deliver projects that exceed your expectations.</p>
+        <p>Vistāra Ventures is a leading architecture, construction, and interior design firm dedicated to transforming spaces into exceptional experiences. Our team of experts combines creativity, precision, and passion to deliver projects that exceed your expectations. With a commitment to excellence, we strive to create environments that inspire and reflect your unique vision.</p>
     </section>
 
     <!-- Services Section -->
