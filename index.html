@@ -7,21 +7,23 @@
     <style>
         /* General Styles */
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Comfortaa', cursive;
             margin: 0;
             padding: 0;
             line-height: 1.6;
             color: #333;
             scroll-behavior: smooth;
+            background-color: #f5f5f5;
         }
 
         header {
-            background: #ff6f61;
-            color: white;
+            background: #ffffff;
+            color: #333;
             padding: 20px 0;
             position: fixed;
             width: 100%;
             z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         nav {
@@ -33,6 +35,11 @@
             padding: 0 20px;
         }
 
+        .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
         .nav-links {
             list-style: none;
             display: flex;
@@ -40,14 +47,14 @@
         }
 
         .nav-links a {
-            color: white;
+            color: #333;
             text-decoration: none;
             font-size: 1em;
             transition: color 0.3s ease;
         }
 
         .nav-links a:hover {
-            color: #e65a50;
+            color: #ff6f61;
         }
 
         .hero {
@@ -102,6 +109,10 @@
 
         .service-item:hover {
             transform: translateY(-10px);
+        }
+
+        .portfolio {
+            background: #f5f5f5;
         }
 
         .gallery {
@@ -168,7 +179,72 @@
         .social-links a:hover {
             transform: scale(1.2);
         }
+
+        /* Slideshow */
+        .slideshow-container {
+            position: relative;
+            max-width: 100%;
+            margin: auto;
+        }
+
+        .slide {
+            display: none;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            margin-top: -22px;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+        }
+
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .prev:hover, .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .dot-container {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .dot {
+            cursor: pointer;
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+
+        .active, .dot:hover {
+            background-color: #ff6f61;
+        }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -219,11 +295,27 @@
     <!-- Portfolio Section -->
     <section id="portfolio" class="portfolio">
         <h2>Our Portfolio</h2>
-        <div class="gallery">
-            <img src="https://via.placeholder.com/400" alt="Project 1">
-            <img src="https://via.placeholder.com/400" alt="Project 2">
-            <img src="https://via.placeholder.com/400" alt="Project 3">
-            <img src="https://via.placeholder.com/400" alt="Project 4">
+        <div class="slideshow-container">
+            <div class="slide">
+                <img src="https://via.placeholder.com/1920x1080" alt="Project 1">
+            </div>
+            <div class="slide">
+                <img src="https://via.placeholder.com/1920x1080" alt="Project 2">
+            </div>
+            <div class="slide">
+                <img src="https://via.placeholder.com/1920x1080" alt="Project 3">
+            </div>
+            <div class="slide">
+                <img src="https://via.placeholder.com/1920x1080" alt="Project 4">
+            </div>
+            <a class="prev" onclick="moveSlide(-1)">&#10094;</a>
+            <a class="next" onclick="moveSlide(1)">&#10095;</a>
+        </div>
+        <div class="dot-container">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
         </div>
     </section>
 
@@ -258,6 +350,39 @@
                 });
             });
         });
+
+        // Slideshow functionality
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+        function moveSlide(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("slide");
+            let dots = document.getElementsByClassName("dot");
+            if (n > slides.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = slides.length }
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+        }
+
+        // Auto-play slideshow
+        setInterval(function() {
+            moveSlide(1);
+        }, 5000);
     </script>
 </body>
 </html>
